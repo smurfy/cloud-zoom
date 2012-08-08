@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////
-// Cloud Zoom V1.0.2.1
+// Cloud Zoom V1.0.2.2
 // (c) 2010 by R Cecco. <http://www.professorcloud.com>
 // MIT License
 //
@@ -20,19 +20,19 @@
 
     function CloudZoom(jWin, opts) {
         var sImg = $('img', jWin);
-		var	img1;
-		var	img2;
+        var	img1;
+        var	img2;
         var zoomDiv = null;
-		var	$mouseTrap = null;
-		var	lens = null;
-		var	$tint = null;
-		var	softFocus = null;
-		var	$ie6Fix = null;
-		var	zoomImage;
+        var	$mouseTrap = null;
+        var	lens = null;
+        var	$tint = null;
+        var	softFocus = null;
+        var	$ie6Fix = null;
+        var	zoomImage;
         var controlTimer = 0;
         var cw, ch;
         var destU = 0;
-		var	destV = 0;
+        var	destV = 0;
         var currV = 0;
         var currU = 0;
         var filesLoaded = 0;
@@ -102,11 +102,11 @@
         // This is called when the zoom window has faded out so it can be removed.
         this.fadedOut = function () {
 
-			if (zoomDiv) {
+            if (zoomDiv) {
                 zoomDiv.remove();
                 zoomDiv = null;
             }
-			 this.removeBits();
+            this.removeBits();
             //ie6FixRemove();
         };
 
@@ -165,12 +165,12 @@
             $('.cloud-zoom-loading', jWin.parent()).remove();
 
 
-/* Add a box (mouseTrap) over the small image to trap mouse events.
-		It has priority over zoom window to avoid issues with inner zoom.
-		We need the dummy background image as IE does not trap mouse events on
-		transparent parts of a div.
-		*/
-            $mouseTrap = jWin.parent().append(format("<div class='mousetrap' style='background-image:url(\".\");z-index:999;position:absolute;width:%0px;height:%1px;left:%2px;top:%3px;\'></div>", sImg.outerWidth(), sImg.outerHeight(), 0, 0)).find(':last');
+            /* Add a box (mouseTrap) over the small image to trap mouse events.
+             It has priority over zoom window to avoid issues with inner zoom.
+             We need the dummy background image as IE does not trap mouse events on
+             transparent parts of a div.
+             */
+            $mouseTrap = jWin.parent().append(format("<div class='mousetrap' style='background-image:url(\""+ opts.transparentImage +"\");z-index:999;position:absolute;width:%0px;height:%1px;left:%2px;top:%3px;\'></div>", sImg.outerWidth(), sImg.outerHeight(), 0, 0)).find(':last');
 
             //////////////////////////////////////////////////////////////////////
             /* Do as little as possible in mousemove event to prevent slowdown. */
@@ -183,17 +183,17 @@
             $mouseTrap.bind('mouseleave', this, function (event) {
                 clearTimeout(controlTimer);
                 //event.data.removeBits();
-				if(lens) { lens.fadeOut(299); }
-				if($tint) { $tint.fadeOut(299); }
-				if(softFocus) { softFocus.fadeOut(299); }
-				zoomDiv.fadeOut(300, function () {
+                if(lens) { lens.fadeOut(299); }
+                if($tint) { $tint.fadeOut(299); }
+                if(softFocus) { softFocus.fadeOut(299); }
+                zoomDiv.fadeOut(300, function () {
                     ctx.fadedOut();
                 });
                 return false;
             });
             //////////////////////////////////////////////////////////////////////
             $mouseTrap.bind('mouseenter', this, function (event) {
-				mx = event.pageX;
+                mx = event.pageX;
                 my = event.pageY;
                 zw = event.data;
                 if (zoomDiv) {
@@ -218,34 +218,34 @@
                 //$('#info').text( xPos + ' ' + yPos + ' ' + siw + ' ' + sih );
                 var appendTo = jWin.parent(); // attach to the wrapper
                 switch (opts.position) {
-                case 'top':
-                    yPos -= h; // + opts.adjustY;
-                    break;
-                case 'right':
-                    xPos += siw; // + opts.adjustX;
-                    break;
-                case 'bottom':
-                    yPos += sih; // + opts.adjustY;
-                    break;
-                case 'left':
-                    xPos -= w; // + opts.adjustX;
-                    break;
-                case 'inside':
-                    w = siw;
-                    h = sih;
-                    break;
-                    // All other values, try and find an id in the dom to attach to.
-                default:
-                    appendTo = $('#' + opts.position);
-                    // If dom element doesn't exit, just use 'right' position as default.
-                    if (!appendTo.length) {
-                        appendTo = jWin;
-                        xPos += siw; //+ opts.adjustX;
+                    case 'top':
+                        yPos -= h; // + opts.adjustY;
+                        break;
+                    case 'right':
+                        xPos += siw; // + opts.adjustX;
+                        break;
+                    case 'bottom':
                         yPos += sih; // + opts.adjustY;
-                    } else {
-                        w = appendTo.innerWidth();
-                        h = appendTo.innerHeight();
-                    }
+                        break;
+                    case 'left':
+                        xPos -= w; // + opts.adjustX;
+                        break;
+                    case 'inside':
+                        w = siw;
+                        h = sih;
+                        break;
+                    // All other values, try and find an id in the dom to attach to.
+                    default:
+                        appendTo = $('#' + opts.position);
+                        // If dom element doesn't exit, just use 'right' position as default.
+                        if (!appendTo.length) {
+                            appendTo = jWin;
+                            xPos += siw; //+ opts.adjustX;
+                            yPos += sih; // + opts.adjustY;
+                        } else {
+                            w = appendTo.innerWidth();
+                            h = appendTo.innerHeight();
+                        }
                 }
 
                 zoomDiv = appendTo.append(format('<div id="cloud-zoom-big" class="cloud-zoom-big" style="display:none;position:absolute;left:%0px;top:%1px;width:%2px;height:%3px;background-image:url(\'%4\');z-index:99;"></div>', xPos, yPos, w, h, zoomImage.src)).find(':last');
@@ -288,8 +288,8 @@
                     lens.css('background', 'url("' + sImg.attr('src') + '")');
                     $tint = jWin.append(format('<div style="display:none;position:absolute; left:0px; top:0px; width:%0px; height:%1px; background-color:%2;" />', sImg.outerWidth(), sImg.outerHeight(), opts.tint)).find(':last');
                     $tint.css('opacity', opts.tintOpacity);
-					noTrans = true;
-					$tint.fadeIn(500);
+                    noTrans = true;
+                    $tint.fadeIn(500);
 
                 }
                 if (opts.softFocus) {
@@ -304,7 +304,7 @@
                 if (!noTrans) {
                     lens.css('opacity', opts.lensOpacity);
                 }
-				if ( opts.position !== 'inside' ) { lens.fadeIn(500); }
+                if ( opts.position !== 'inside' ) { lens.fadeIn(500); }
 
                 // Start processing.
                 zw.controlLoop();
@@ -332,11 +332,14 @@
             document.execCommand("BackgroundImageCache", false, true);
         } catch (e) {}
         this.each(function () {
-			var	relOpts, opts;
-			// Hmm...eval...slap on wrist.
-			eval('var	a = {' + $(this).attr('rel') + '}');
-			relOpts = a;
+            var	relOpts, opts;
+            // Hmm...eval...slap on wrist.
+            eval('var	a = {' + $(this).attr('rel') + '}');
+            relOpts = a;
             if ($(this).is('.cloud-zoom')) {
+                opts = $.extend({}, $.fn.CloudZoom.defaults, options);
+                opts = $.extend({}, opts, relOpts);
+
                 $(this).css({
                     'position': 'relative',
                     'display': 'block'
@@ -344,13 +347,13 @@
                 $('img', $(this)).css({
                     'display': 'block'
                 });
+
+
                 // Wrap an outer div around the link so we can attach things without them becoming part of the link.
                 // But not if wrap already exists.
-                if ($(this).parent().attr('id') != 'wrap') {
-                    $(this).wrap('<div id="wrap" style="top:0px;z-index:9999;position:relative;"></div>');
+                if (!$(this).parent().hasClass('cloud-zoom-wrap') && opts.useWrapper) {
+                    $(this).wrap('<div class="cloud-zoom-wrap"></div>');
                 }
-                opts = $.extend({}, $.fn.CloudZoom.defaults, options);
-                opts = $.extend({}, opts, relOpts);
                 $(this).data('zoom', new CloudZoom($(this), opts));
 
             } else if ($(this).is('.cloud-zoom-gallery')) {
@@ -377,6 +380,8 @@
         zoomWidth: 'auto',
         zoomHeight: 'auto',
         position: 'right',
+        transparentImage: '.',
+        useWrapper: true,
         tint: false,
         tintOpacity: 0.5,
         lensOpacity: 0.5,

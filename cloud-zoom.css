@@ -21,6 +21,13 @@
 	top:0px;
 }
 
+/* cloud zoom wrapper styles */
+.cloud-zoom-wrap {
+    top:0;
+    z-index:9999;
+    position:relative;
+}
+
 /* This is the zoom window. */
 .cloud-zoom-big {
 	border:4px solid #ccc;
