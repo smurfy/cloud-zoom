@@ -12,3 +12,12 @@ Changes since the fork:
 * You can disable the creation of the wrapper div
 * The wrapper div styles are moved to the css file
 * The wrapper div has no longer an id, but a css class name instead (cloud-zoom-wrap)
+
+
+
+Destroy the instance
+====================
+
+This can be useful if you want to click through a gallery, and swap out the zoom image.
+
+    $(".cloud-zoom").data("zoom").destroy();
