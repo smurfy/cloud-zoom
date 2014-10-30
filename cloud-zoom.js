@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////
-// Cloud Zoom V1.0.2.5
+// Cloud Zoom V1.0.2.6
 // (c) 2010 by R Cecco. <http://www.professorcloud.com>
 // with enhancements by Philipp Andreas <https://github.com/smurfy/cloud-zoom>
 //
