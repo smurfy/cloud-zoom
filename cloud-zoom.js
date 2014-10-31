@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////
-// Cloud Zoom V1.0.2.5
+// Cloud Zoom V1.0.2.6
 // (c) 2010 by R Cecco. <http://www.professorcloud.com>
 // with enhancements by Philipp Andreas <https://github.com/smurfy/cloud-zoom>
 //
@@ -183,6 +183,7 @@
             });
             //////////////////////////////////////////////////////////////////////
             $mouseTrap.bind('mouseleave', this, function (event) {
+                jWin.trigger('cloudzoom_end_zoom');
                 clearTimeout(controlTimer);
                 //event.data.removeBits();
                 if(lens) { lens.fadeOut(299); }
@@ -195,6 +196,7 @@
             });
             //////////////////////////////////////////////////////////////////////
             $mouseTrap.bind('mouseenter', this, function (event) {
+                jWin.trigger('cloudzoom_start_zoom');
                 mx = event.pageX;
                 my = event.pageY;
                 zw = event.data;
@@ -316,6 +318,7 @@
 
                 return; // Don't return false here otherwise opera will not detect change of the mouse pointer type.
             });
+            jWin.trigger('cloudzoom_ready');
         };
 
         img1 = new Image();
