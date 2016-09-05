@@ -1,7 +1,7 @@
 {
     "name": "professorcloud/cloud-zoom",
     "description": "Cloud-Zoom Jquery plugin",
-    "version": "1.0.2.6",
+    "version": "1.0.2.7",
     "homepage": "https://github.com/smurfy/cloud-zoom",
     "license" : "MIT"
 }
