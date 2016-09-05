@@ -367,7 +367,7 @@
             } else if ($(this).is('.cloud-zoom-gallery')) {
                 opts = $.extend({}, relOpts, options);
                 $(this).data('relOpts', opts);
-                $(this).bind('click', $(this), function (event) {
+                var switchImage = function (event) {
                     var data = event.data.data('relOpts');
                     // Destroy the previous zoom
                     $('#' + data.useZoom).data('zoom').destroy();
@@ -378,7 +378,12 @@
                     // Init a new zoom with the new images.
                     $('#' + event.data.data('relOpts').useZoom).CloudZoom();
                     return false;
-                });
+                };
+                $(this).bind('click', $(this), switchImage);
+
+                if (opts.gallerySwitchOnMouseOver) {
+                    $(this).bind('mouseover', $(this), switchImage);
+                }
             }
         });
         return this;
@@ -398,7 +403,8 @@
         showTitle: true,
         titleOpacity: 0.5,
         adjustX: 0,
-        adjustY: 0
+        adjustY: 0,
+        gallerySwitchOnMouseOver: false
     };
 
 })(jQuery);

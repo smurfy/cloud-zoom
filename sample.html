@@ -5,14 +5,65 @@
         <script type="text/javascript" src="cloud-zoom.js"></script>
         <link rel="stylesheet" href="cloud-zoom.css" type="text/css">
     </head>
+    <style type="text/css">
+        .basic-sample > div {
+            width: 300px;
+            height: 400px;
+        }
 
+        .gallery-sample a.cloud-zoom {
+            position: relative;
+            display: block;
+        }
+        .gallery-sample a.cloud-zoom img {
+            display: block;
+            width: 500px;
+            text-align: center;
+        }
+
+        .recent_list {
+            display: -webkit-box;
+            list-style: none;
+        }
+
+        .recent_list li {
+            border: 1px solid #ddd;
+        }
+    </style>
     <body>
-        <div style="width: 300px; height: 400px;">
-            <a href="http://www.starplugins.com/sites/starplugins/images/jetzoom/large/image1.jpg" class="cloud-zoom" rel="transparentImage: 'data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==', useWrapper: false, showTitle: true, zoomWidth:'300', zoomHeight:'400', adjustY:0, adjustX:10">
-                <img src="http://www.starplugins.com/sites/starplugins/images/jetzoom/small/image1.jpg" title="Sample Title">
-            </a>
+
+        <div class="basic-sample">
+            <h2>Basic Sample</h2>
+            <div>
+               <a href="./images/3-Z.jpg" class="cloud-zoom" rel="transparentImage: 'data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==', useWrapper: false, showTitle: true, zoomWidth:'300', zoomHeight:'400', adjustY:0, adjustX:10">
+                    <img src="./images/3-M.jpg" title="Sample Title">
+                </a>
+            </div>
         </div>
 
+        <div class="gallery-sample">
+            <h2>Gallery Sample (with mouseover support for switching images enabled)</h2>
+            <a href="./images/3-Z.jpg" class="cloud-zoom" id="cloudZoom">
+                <img src="./images/3-Z.jpg" title="The Title" class="img-responsive">
+            </a>
+            <ul class="recent_list">
+                <li class="photo_container">
+                    <a href="./images/3-Z.jpg" rel="gallerySwitchOnMouseOver: true, popupWin:'./images/3-Z.jpg', useZoom: 'cloudZoom', smallImage: './images/3-Z.jpg'" class="cloud-zoom-gallery">
+                        <img itemprop="image" src="./images/3-M.jpg" class="img-responsive">
+                    </a>
+                </li>
+                <li class="photo_container">
+                    <a href="./images/4-Z.jpg" rel="gallerySwitchOnMouseOver: true, popupWin:'./images/4-Z.jpg', useZoom: 'cloudZoom', smallImage: './images/4-Z.jpg'" class="cloud-zoom-gallery">
+                        <img itemprop="image" src="./images/4-M.jpg" class="img-responsive">
+                    </a>
+                </li>
+                <li class="photo_container">
+                    <a href="./images/5-Z.jpg" rel="gallerySwitchOnMouseOver: true, popupWin:'./images/5-Z.jpg', useZoom: 'cloudZoom', smallImage: './images/5-Z.jpg'" class="cloud-zoom-gallery">
+                        <img itemprop="image" src="./images/5-M.jpg" class="img-responsive">
+                    </a>
+                </li>
+            </ul>
+        </div>
     </body>
 
 </html>
