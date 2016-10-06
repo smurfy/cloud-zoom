@@ -393,7 +393,7 @@
         zoomWidth: 'auto',
         zoomHeight: 'auto',
         position: 'right',
-        transparentImage: '.',
+        transparentImage: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
         useWrapper: true,
         tint: false,
         tintOpacity: 0.5,
